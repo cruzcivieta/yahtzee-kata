@@ -17,28 +17,27 @@ class Scorer
         }
 
         if ($category->isOne()) {
-            $dicesFiltered = $this->filterByNumber($dices, 1);
-            return array_sum($dicesFiltered);
+            return $this->applyNumberRule($dices, 1);
         }
 
         if ($category->isTwo()) {
-            $dicesFiltered = $this->filterByNumber($dices, 2);
-            return array_sum($dicesFiltered);
+            return $this->applyNumberRule($dices, 2);
         }
 
         if ($category->isThree()) {
-            $dicesFiltered = $this->filterByNumber($dices, 3);
-            return array_sum($dicesFiltered);
+            return $this->applyNumberRule($dices, 3);
         }
 
         if ($category->isFour()) {
-            $dicesFiltered = $this->filterByNumber($dices, 4);
-            return array_sum($dicesFiltered);
+            return $this->applyNumberRule($dices, 4);
         }
 
         if ($category->isFive()) {
-            $dicesFiltered = $this->filterByNumber($dices, 5);
-            return array_sum($dicesFiltered);
+            return $this->applyNumberRule($dices, 5);
+        }
+
+        if ($category->isSix()) {
+            return $this->applyNumberRule($dices, 6);
         }
 
         if ($category->isYahtzee() && $dices === [1, 2, 3, 4, 5, 6]) {
@@ -64,5 +63,16 @@ class Scorer
         });
 
         return $dicesFiltered;
+    }
+
+    /**
+     * @param $dices
+     * @param $number
+     * @return number
+     */
+    private function applyNumberRule($dices, $number)
+    {
+        $dicesFiltered = $this->filterByNumber($dices, $number);
+        return array_sum($dicesFiltered);
     }
 }

@@ -202,5 +202,31 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
         static::assertEquals(15, $score);
     }
 
+    /**
+     * @test
+     */
+    public function give_a_valid_six_category_roll_then_return_sum_of_two_numbers()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([5,5,6,6,5]);
+        $category = Category::six();
 
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(12, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function give_a_not_valid_six_category_roll_then_return_zero()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([1,1,4,4,3]);
+        $category = Category::six();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertSame(0, $score);
+    }
 }

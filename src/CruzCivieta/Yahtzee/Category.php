@@ -11,6 +11,9 @@ class Category
     const YAHTZEE = 20;
     const TWO = 2;
     const THREE = 3;
+    const FOUR = 4;
+    const FIVE = 5;
+    const SIX = 6;
 
     private $category;
 
@@ -25,7 +28,9 @@ class Category
 
     public static function random()
     {
-        return new static(static::ONE);
+        $constants = get_defined_constants();
+
+        return new static($constants[array_rand($constants)]);
     }
 
     public static function chance()
@@ -55,12 +60,17 @@ class Category
 
     public static function four()
     {
-        return new static(4);
+        return new static(static::FOUR);
     }
 
     public static function five()
     {
-        return new static(5);
+        return new static(static::FIVE);
+    }
+
+    public static function six()
+    {
+        return new static(static::SIX);
     }
 
     public function isCategory($category)
@@ -85,12 +95,17 @@ class Category
 
     public function isFour()
     {
-        return $this->isCategory(4);
+        return $this->isCategory(static::FOUR);
     }
 
     public function isFive()
     {
-        return $this->isCategory(5);
+        return $this->isCategory(static::FIVE);
+    }
+
+    public function isSix()
+    {
+        return $this->isCategory(static::SIX);
     }
 
     public function isYahtzee()
