@@ -1,0 +1,33 @@
+{
+  "name": "cruzcivieta/kata-yahtzee",
+  "description": "Kata for Yahtzee game",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Cruz",
+      "email": "daniel.cruz.civieta@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-4": {
+      "CruzCivieta\\": "src/CruzCivieta/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CruzCivieta\\": "tests/CruzCivieta/"
+    }
+  },
+  "scripts": {
+    "test": "bin/phpunit"
+  }
+}
