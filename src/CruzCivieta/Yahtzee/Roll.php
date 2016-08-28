@@ -23,4 +23,9 @@ class Roll
     {
         return $this->roll;
     }
+
+    public function isEmpty()
+    {
+        return empty($this->roll);
+    }
 }
