@@ -25,6 +25,7 @@ class Scorer
             new Rule\SixesRule(),
             new Rule\YahtzeeRule(),
             new Rule\ChanceRule(),
+            new Rule\PairRule(),
         ];
     }
 

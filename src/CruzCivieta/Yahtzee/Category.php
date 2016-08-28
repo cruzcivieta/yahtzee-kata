@@ -73,6 +73,11 @@ class Category
         return new static(static::SIX);
     }
 
+    public static function pairs()
+    {
+        return new static(7);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;
@@ -116,6 +121,11 @@ class Category
     public function isChance()
     {
         return $this->isCategory(static::CHANCE);
+    }
+
+    public function isPairCategory()
+    {
+        return$this->isCategory(7);
     }
 
 }
