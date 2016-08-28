@@ -28,4 +28,46 @@ class Roll
     {
         return empty($this->roll);
     }
+
+    public function retrieveHighestPair()
+    {
+        $reverseRoll = array_reverse($this->roll);
+        $differentDices = array_unique($reverseRoll);
+
+        if (count($differentDices) === 6) {
+            return [];
+        }
+
+        return $this->findHighestPair($differentDices, $reverseRoll);
+    }
+
+    /**
+     * @param $differentDices
+     * @param $reverseRoll
+     * @return array
+     */
+    private function findHighestPair($differentDices, $reverseRoll)
+    {
+        foreach ($differentDices as $dice) {
+            $equalsDices = $this->findEqualsDicesBy($reverseRoll, $dice);
+
+            if (count($equalsDices) === 2) {
+                return $equalsDices;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @param $reverseRoll
+     * @param $dice
+     * @return array
+     */
+    private function findEqualsDicesBy($reverseRoll, $dice)
+    {
+        return array_filter($reverseRoll, function ($element) use ($dice) {
+            return $element === $dice;
+        });
+    }
 }

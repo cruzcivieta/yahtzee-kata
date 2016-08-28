@@ -16,7 +16,7 @@ class PairRule implements ScoreRule
      */
     public function apply(Roll $roll)
     {
-        $roll = $roll->retrieveRoll();
+        $roll = $roll->retrieveHighestPair();
 
         $reverseRoll = array_reverse($roll);
         $differentDices = array_unique($reverseRoll);
