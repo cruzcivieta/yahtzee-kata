@@ -79,6 +79,11 @@ class Category
         return new static(static::PAIRS);
     }
 
+    public static function threeOfaKind()
+    {
+        return new static(8);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;
@@ -126,7 +131,12 @@ class Category
 
     public function isPairCategory()
     {
-        return$this->isCategory(static::PAIRS);
+        return $this->isCategory(static::PAIRS);
+    }
+
+    public function isThreeOfaKind()
+    {
+        return $this->isCategory(8);
     }
 
 }

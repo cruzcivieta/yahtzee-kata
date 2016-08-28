@@ -70,4 +70,29 @@ class Roll
             return $element === $dice;
         });
     }
+
+    public function retrieveHighestThreeOfaKind()
+    {
+        $reverseRoll = array_reverse($this->roll);
+        $differentDices = array_unique($reverseRoll);
+
+        if (count($differentDices) === 6) {
+            return [];
+        }
+
+        return $this->findHighestThreeOfaKind($differentDices, $reverseRoll);
+    }
+
+    private function findHighestThreeOfaKind($differentDices, $reverseRoll)
+    {
+        foreach ($differentDices as $dice) {
+            $equalsDices = $this->findEqualsDicesBy($reverseRoll, $dice);
+
+            if (count($equalsDices) === 3) {
+                return $equalsDices;
+            }
+        }
+
+        return [];
+    }
 }
