@@ -440,4 +440,46 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
 
         static::assertSame(0, $score);
     }
+
+    /**
+     * @test
+     */
+    public function given_a_valid_full_house_roll_then_return_sum_of_all_dices()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([1, 1, 2, 2, 2, 5]);
+        $category = Category::fullHouse();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(8, $score);
+    }
+
+    /**
+    * @test
+    */
+    public function given_another_valid_full_house_then_return_sum_of_all_dices()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([1, 1, 1, 5, 5, 4]);
+        $category = Category::fullHouse();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(13, $score);
+    }
+
+    /**
+    * @test
+    */
+    public function given_not_valid_full_house_then_return_sum_of_all_dices()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([1, 1, 1, 1, 5, 5]);
+        $category = Category::fullHouse();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertSame(0, $score);
+    }
 }

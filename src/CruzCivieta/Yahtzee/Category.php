@@ -99,6 +99,11 @@ class Category
         return new static(11);
     }
 
+    public static function fullHouse()
+    {
+        return new static(12);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;

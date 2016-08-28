@@ -30,6 +30,7 @@ class Scorer
             new Rule\FourEqualsRule(),
             new Rule\SmallStraightRule(),
             new Rule\LargeStraightRule(),
+            new Rule\FullHouseRule(),
         ];
     }
 
