@@ -6,381 +6,46 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
-     */
-    public function given_a_empty_roll_then_scores_zero_points()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([]);
-        $category = Category::random();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_chance_category_then_return_the_sum_of_them()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 2, 5, 6]);
-        $category = Category::chance();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(15, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_valid_yahtzee_roll_then_return_fifty_score()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([3, 2, 1, 4, 5, 6]);
-        $category = Category::yahtzee();
-
-        $scorer = $scorer->score($roll, $category);
-
-        static::assertEquals(50, $scorer);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_not_valid_yahtzee_roll_then_return_zero_score()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 3, 4, 5, 6]);
-        $category = Category::yahtzee();
-
-        $scorer = $scorer->score($roll, $category);
-
-        static::assertEquals(0, $scorer);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_valid_one_category_roll_then_return_sum_of_one_numbers()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 6, 6, 5]);
-        $category = Category::one();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(2, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_not_valid_one_category_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 3, 5, 5, 6]);
-        $category = Category::one();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_valid_two_category_roll_then_return_sum_of_two_numbers()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 6, 6, 5]);
-        $category = Category::two();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(4, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_not_valid_two_category_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 6, 6, 5]);
-        $category = Category::two();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-
-    /**
-     * @test
-     */
-    public function give_a_valid_three_category_roll_then_return_sum_of_two_numbers()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([3, 3, 6, 6, 5]);
-        $category = Category::three();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(6, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_not_valid_three_category_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 6, 6, 5]);
-        $category = Category::three();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-
-    /**
-     * @test
-     */
-    public function give_a_not_valid_four_category_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 6, 6, 5]);
-        $category = Category::four();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_valid_four_category_roll_then_return_sum_of_two_numbers()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([4, 4, 6, 6, 5]);
-        $category = Category::four();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(8, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_not_valid_five_category_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 6, 6, 3]);
-        $category = Category::five();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_valid_five_category_roll_then_return_sum_of_two_numbers()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([5, 5, 6, 6, 5]);
-        $category = Category::five();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(15, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_valid_six_category_roll_then_return_sum_of_two_numbers()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([5, 5, 6, 6, 5]);
-        $category = Category::six();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(12, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function give_a_not_valid_six_category_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 4, 4, 3]);
-        $category = Category::six();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_pairs_then_return_sum_of_total_pairs()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 2, 4, 3]);
-        $category = Category::pairs();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(2, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_two_different_pairs_then_return_sum_of_highest_pairs()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 1, 4, 4, 3]);
-        $category = Category::pairs();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(8, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_without_pairs_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 2, 3, 4, 5, 6]);
-        $category = Category::pairs();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_three_equals_dices_then_return_sum_of_them()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 2, 4, 5, 6]);
-        $category = Category::threeOfaKind();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(6, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_two_three_equals_dices_then_return_the_sum_of_highest_dices()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 2, 3, 3, 3]);
-        $category = Category::threeOfaKind();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(9, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_without_three_of_a_kind_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 3, 4, 5, 6]);
-        $category = Category::threeOfaKind();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_four_equals_dices_then_return_sum_of_them()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 2, 2, 5, 6]);
-        $category = Category::fourOfaKind();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(8, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_with_four_different_equals_dices_then_return_sum_of_them()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([4, 4, 4, 4, 5, 6]);
-        $category = Category::fourOfaKind();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(16, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_roll_without_four_of_a_kind_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 2, 4, 5, 6]);
-        $category = Category::fourOfaKind();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
      * @dataProvider dataProvider
      */
     public function given_valid_roll_for_category_then_sum_all_dices_in_other_case_zero($category, $dices, $expected)
     {
-        $scorer = $this->createScorer();
+        $scorer = new Scorer();
         $roll = new Roll($dices);
 
         $score = $scorer->score($roll, $category);
 
-        static::assertEquals($expected, $score);
-    }
-
-    /**
-     * @return Scorer
-     */
-    private function createScorer()
-    {
-        return new Scorer();
+        static::assertSame($expected, $score);
     }
 
     public function dataProvider()
     {
         return [
+            [Category::random(), [], 0],
+            [Category::chance(), [1, 1, 2, 5, 6], 15],
+            [Category::yahtzee(), [3, 2, 1, 4, 5, 6], 50],
+            [Category::yahtzee(), [2, 2, 3, 4, 5, 6], 0],
+            [Category::one(), [1, 1, 6, 6, 5], 2],
+            [Category::one(), [2, 3, 5, 5, 6], 0],
+            [Category::two(), [2, 2, 6, 6, 5], 4],
+            [Category::two(), [1, 1, 6, 6, 5], 0],
+            [Category::three(), [3, 3, 6, 6, 5], 6],
+            [Category::three(), [1, 1, 6, 6, 5], 0],
+            [Category::four(), [4, 4, 6, 6, 5], 8],
+            [Category::four(), [1, 1, 6, 6, 5], 0],
+            [Category::five(), [5, 5, 6, 6, 5], 15],
+            [Category::five(), [1, 1, 6, 6, 3], 0],
+            [Category::six(), [5, 5, 6, 6, 5], 12],
+            [Category::six(), [1, 1, 4, 4, 3], 0],
+            [Category::pairs(), [1, 1, 2, 4, 3], 2],
+            [Category::pairs(), [1, 1, 4, 4, 3], 8],
+            [Category::pairs(), [1, 2, 3, 4, 5, 6], 0],
+            [Category::threeOfaKind(), [2, 2, 2, 4, 5, 6], 6],
+            [Category::threeOfaKind(), [2, 2, 2, 3, 3, 3], 9],
+            [Category::threeOfaKind(), [2, 2, 3, 4, 5, 6], 0],
+            [Category::fourOfaKind(), [2, 2, 2, 2, 5, 6], 8],
+            [Category::fourOfaKind(), [4, 4, 4, 4, 5, 6], 16],
+            [Category::fourOfaKind(), [2, 2, 2, 4, 5, 6], 0],
             [Category::smallStraight(), [1, 2, 3, 4, 5, 6], 15],
             [Category::smallStraight(), [1, 2, 3, 4, 3, 5], 15],
             [Category::smallStraight(), [1, 2, 3, 5, 5, 5], 0],
