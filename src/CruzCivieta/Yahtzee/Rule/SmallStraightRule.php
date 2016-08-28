@@ -15,10 +15,7 @@ class SmallStraightRule implements ScoreRule
      */
     public function apply(Roll $roll)
     {
-        $dices = array_slice($roll->retrieveRoll(), 0, 5);
-        $smallStraight = [1, 2, 3, 4, 5];
-
-        return $dices === $smallStraight ? 15: 0;
+        return $roll->isSmallStraight() ? 15: 0;
     }
 
     /**

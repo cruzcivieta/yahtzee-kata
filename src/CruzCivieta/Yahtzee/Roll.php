@@ -11,6 +11,7 @@ class Roll
     const PAIR = 2;
     const THREE_OF_A_KIND = 3;
     const FOUR_OF_A_KIND = 4;
+    const SMALL_STRAIGHT = [1, 2, 3, 4, 5];
 
     /**
      * Roll constructor.
@@ -84,5 +85,20 @@ class Roll
         return array_filter($this->roll, function ($dice) use ($number) {
             return $dice === $number;
         });
+    }
+
+    public function isSmallStraight()
+    {
+        $dices = $this->retrieveFirstFiveDices();
+
+        return $dices === static::SMALL_STRAIGHT;
+    }
+
+    /**
+     * @return array
+     */
+    private function retrieveFirstFiveDices()
+    {
+        return array_slice($this->roll, 0, 5);
     }
 }

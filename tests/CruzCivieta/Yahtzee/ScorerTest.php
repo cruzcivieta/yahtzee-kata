@@ -382,5 +382,5 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
         $score = $scorer->score($roll, $category);
 
         static::assertEquals(0, $score);
-    }
+    }s
 }
