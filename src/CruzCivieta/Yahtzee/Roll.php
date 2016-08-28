@@ -8,6 +8,8 @@ class Roll
 {
 
     private $roll;
+    const PAIR = 2;
+    const THREE_OF_A_KIND = 3;
 
     /**
      * Roll constructor.
@@ -31,6 +33,16 @@ class Roll
 
     public function retrieveHighestPair()
     {
+        return $this->findHighestRepeatedNumber(static::PAIR);
+    }
+
+    public function retrieveHighestThreeOfaKind()
+    {
+        return $this->findHighestRepeatedNumber(static::THREE_OF_A_KIND);
+    }
+
+    private function findHighestRepeatedNumber($number)
+    {
         $reverseRoll = array_reverse($this->roll);
         $differentDices = array_unique($reverseRoll);
 
@@ -38,20 +50,10 @@ class Roll
             return [];
         }
 
-        return $this->findHighestPair($differentDices, $reverseRoll);
-    }
-
-    /**
-     * @param $differentDices
-     * @param $reverseRoll
-     * @return array
-     */
-    private function findHighestPair($differentDices, $reverseRoll)
-    {
         foreach ($differentDices as $dice) {
             $equalsDices = $this->findEqualsDicesBy($reverseRoll, $dice);
 
-            if (count($equalsDices) === 2) {
+            if (count($equalsDices) === $number) {
                 return $equalsDices;
             }
         }
@@ -71,28 +73,4 @@ class Roll
         });
     }
 
-    public function retrieveHighestThreeOfaKind()
-    {
-        $reverseRoll = array_reverse($this->roll);
-        $differentDices = array_unique($reverseRoll);
-
-        if (count($differentDices) === 6) {
-            return [];
-        }
-
-        return $this->findHighestThreeOfaKind($differentDices, $reverseRoll);
-    }
-
-    private function findHighestThreeOfaKind($differentDices, $reverseRoll)
-    {
-        foreach ($differentDices as $dice) {
-            $equalsDices = $this->findEqualsDicesBy($reverseRoll, $dice);
-
-            if (count($equalsDices) === 3) {
-                return $equalsDices;
-            }
-        }
-
-        return [];
-    }
 }
