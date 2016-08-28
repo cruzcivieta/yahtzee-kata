@@ -21,23 +21,6 @@ abstract class NumbersRule implements ScoreRule
 
     public function apply(Roll $roll)
     {
-        $dicesFiltered = $this->filterByNumber($roll->retrieveRoll(), $this->number);
-
-        return array_sum($dicesFiltered);
+        return array_sum($roll->retrieveDiceOfNumber($this->number));
     }
-
-    /**
-     * @param $dices
-     * @param $number
-     * @return array
-     */
-    private function filterByNumber($dices, $number)
-    {
-        $dicesFiltered = array_filter($dices, function ($dice) use ($number) {
-            return $dice === $number;
-        });
-
-        return $dicesFiltered;
-    }
-
 }

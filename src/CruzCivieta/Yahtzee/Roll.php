@@ -10,6 +10,7 @@ class Roll
     private $roll;
     const PAIR = 2;
     const THREE_OF_A_KIND = 3;
+    const FOUR_OF_A_KIND = 4;
 
     /**
      * Roll constructor.
@@ -43,7 +44,7 @@ class Roll
 
     public function retrieveFourOfaKind()
     {
-        return $this->findHighestRepeatedNumber(4);
+        return $this->findHighestRepeatedNumber(static::FOUR_OF_A_KIND);
     }
 
     private function findHighestRepeatedNumber($number)
@@ -75,6 +76,13 @@ class Roll
     {
         return array_filter($reverseRoll, function ($element) use ($dice) {
             return $element === $dice;
+        });
+    }
+
+    public function retrieveDiceOfNumber($number)
+    {
+        return array_filter($this->roll, function ($dice) use ($number) {
+            return $dice === $number;
         });
     }
 }
