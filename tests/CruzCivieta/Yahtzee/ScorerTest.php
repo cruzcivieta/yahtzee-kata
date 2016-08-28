@@ -358,98 +358,12 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @dataProvider dataProvider
      */
-    public function given_a_valid_small_straight_roll_then_return_fifteen()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 2, 3, 4, 5, 6]);
-        $category = Category::smallStraight();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(15, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_another_valid_small_straight_roll_then_return_fifteen()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 2, 3, 4, 3, 5]);
-        $category = Category::smallStraight();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(15, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_not_valid_small_Straight_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([1, 2, 3, 5, 5, 5]);
-        $category = Category::smallStraight();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-
-    /**
-     * @test
-     */
-    public function given_a_valid_large_straight_roll_then_return_twenty()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 2, 4, 5, 3, 6]);
-        $category = Category::largeStraight();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(20, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_another_valid_large_straight_roll_then_return_twenty()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([2, 3, 4, 5, 6, 6]);
-        $category = Category::largeStraight();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertEquals(20, $score);
-    }
-
-    /**
-     * @test
-     */
-    public function given_a_not_valid_large_Straight_roll_then_return_zero()
-    {
-        $scorer = $this->createScorer();
-        $roll = new Roll([6, 6, 3, 4, 5, 6]);
-        $category = Category::largeStraight();
-
-        $score = $scorer->score($roll, $category);
-
-        static::assertSame(0, $score);
-    }
-
-    /**
-     * @test
-     * @dataProvider fullHouseDataProvider
-     */
-    public function given_a_valid_data_provider_full_house_roll_then_return_sum_of_all_dices($dices, $expected)
+    public function given_valid_roll_for_category_then_sum_all_dices_in_other_case_zero($category, $dices, $expected)
     {
         $scorer = $this->createScorer();
         $roll = new Roll($dices);
-        $category = Category::fullHouse();
 
         $score = $scorer->score($roll, $category);
 
@@ -464,12 +378,18 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
         return new Scorer();
     }
 
-
-    public function fullHouseDataProvider() {
+    public function dataProvider()
+    {
         return [
-            [[1, 1, 2, 2, 2, 5], 8],
-            [[1, 1, 1, 5, 5, 4], 13],
-            [[1, 1, 1, 1, 5, 5], 0],
+            [Category::smallStraight(), [1, 2, 3, 4, 5, 6], 15],
+            [Category::smallStraight(), [1, 2, 3, 4, 3, 5], 15],
+            [Category::smallStraight(), [1, 2, 3, 5, 5, 5], 0],
+            [Category::largeStraight(), [2, 3, 4, 5, 6, 6], 20],
+            [Category::largeStraight(), [2, 2, 4, 5, 3, 6], 20],
+            [Category::largeStraight(), [6, 6, 3, 4, 5, 6], 0],
+            [Category::fullHouse(), [1, 1, 2, 2, 2, 5], 8],
+            [Category::fullHouse(), [1, 1, 1, 5, 5, 4], 13],
+            [Category::fullHouse(), [1, 1, 1, 1, 5, 5], 0],
         ];
     }
 }
