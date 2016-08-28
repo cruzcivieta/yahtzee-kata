@@ -133,4 +133,13 @@ class Roll
 
         return array_slice($differentDices, 0, 5);
     }
+
+    public function retrieveFullHouse()
+    {
+        $pair = $this->retrieveHighestPair();
+        $three = $this->retrieveHighestThreeOfaKind();
+        $fullHouse = array_merge([], $pair, $three);
+
+        return count($fullHouse) === 5 ? $fullHouse : [];
+    }
 }

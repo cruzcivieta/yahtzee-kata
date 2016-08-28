@@ -15,11 +15,7 @@ class FullHouseRule implements ScoreRule
      */
     public function apply(Roll $roll)
     {
-        $pair = $roll->retrieveHighestPair();
-        $three = $roll->retrieveHighestThreeOfaKind();
-        $fullHouse = array_merge([], $pair, $three);
-
-        return count($fullHouse) === 5 ? array_sum($fullHouse) : 0;
+        return array_sum($roll->retrieveFullHouse());
     }
 
     /**
