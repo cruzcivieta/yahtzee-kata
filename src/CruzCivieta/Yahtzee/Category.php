@@ -15,6 +15,12 @@ class Category
     const FIVE = 5;
     const SIX = 6;
     const PAIRS = 7;
+    const THREE_OF_A_KIND = 8;
+    const FOUR_OF_A_KIND = 9;
+    const SMALL_STRAIGHT = 10;
+    const LARGE_STRAIGHT = 11;
+    const FULL_HOUSE = 12;
+
 
     private $category;
 
@@ -22,7 +28,7 @@ class Category
      * Category constructor.
      * @param $category
      */
-    public function __construct($category)
+    private function __construct($category)
     {
         $this->category = $category;
     }
@@ -81,27 +87,27 @@ class Category
 
     public static function threeOfaKind()
     {
-        return new static(8);
+        return new static(static::THREE_OF_A_KIND);
     }
 
     public static function fourOfaKind()
     {
-        return new static(9);
+        return new static(static::FOUR_OF_A_KIND);
     }
 
     public static function smallStraight()
     {
-        return new static(10);
+        return new static(static::SMALL_STRAIGHT);
     }
 
     public static function largeStraight()
     {
-        return new static(11);
+        return new static(static::LARGE_STRAIGHT);
     }
 
     public static function fullHouse()
     {
-        return new static(12);
+        return new static(static::FULL_HOUSE);
     }
 
     public function isCategory($category)
@@ -156,11 +162,11 @@ class Category
 
     public function isThreeOfaKind()
     {
-        return $this->isCategory(8);
+        return $this->isCategory(static::THREE_OF_A_KIND);
     }
 
     public function isFourOfaKind()
     {
-        return $this->isCategory(9);
+        return $this->isCategory(static::FOUR_OF_A_KIND);
     }
 }
