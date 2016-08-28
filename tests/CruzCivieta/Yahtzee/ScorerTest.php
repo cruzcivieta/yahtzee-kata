@@ -314,4 +314,45 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
         static::assertSame(0, $score);
     }
 
+    /**
+     * @test
+     */
+    public function given_a_roll_with_four_equals_dices_then_return_sum_of_them()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([2, 2, 2, 2, 5, 6]);
+        $category = Category::fourOfaKind();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(8, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function given_a_roll_with_four_different_equals_dices_then_return_sum_of_them()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([4, 4, 4, 4, 5, 6]);
+        $category = Category::fourOfaKind();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(16, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function given_a_roll_without_four_of_a_kind_then_return_zero()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([2, 2, 2, 4, 5, 6]);
+        $category = Category::fourOfaKind();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertSame(0, $score);
+    }
 }

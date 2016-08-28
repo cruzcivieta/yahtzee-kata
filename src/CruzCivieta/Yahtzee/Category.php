@@ -84,6 +84,11 @@ class Category
         return new static(8);
     }
 
+    public static function fourOfaKind()
+    {
+        return new static(9);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;
@@ -139,4 +144,8 @@ class Category
         return $this->isCategory(8);
     }
 
+    public function isFourOfaKind()
+    {
+        return $this->isCategory(9);
+    }
 }

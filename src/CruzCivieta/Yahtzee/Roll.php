@@ -41,6 +41,11 @@ class Roll
         return $this->findHighestRepeatedNumber(static::THREE_OF_A_KIND);
     }
 
+    public function retrieveFourOfaKind()
+    {
+        return $this->findHighestRepeatedNumber(4);
+    }
+
     private function findHighestRepeatedNumber($number)
     {
         $reverseRoll = array_reverse($this->roll);
@@ -72,5 +77,4 @@ class Roll
             return $element === $dice;
         });
     }
-
 }

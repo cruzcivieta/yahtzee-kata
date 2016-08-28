@@ -27,7 +27,7 @@ class Scorer
             new Rule\ChanceRule(),
             new Rule\PairRule(),
             new Rule\ThreeEqualsRule(),
-
+            new Rule\FourEqualsRule(),
         ];
     }
 
