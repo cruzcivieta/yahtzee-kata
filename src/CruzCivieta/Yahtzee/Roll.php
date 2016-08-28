@@ -12,6 +12,7 @@ class Roll
     const THREE_OF_A_KIND = 3;
     const FOUR_OF_A_KIND = 4;
     const SMALL_STRAIGHT = [1, 2, 3, 4, 5];
+    const LARGE_STRAIGHT = [2, 3, 4, 5, 6];
 
     /**
      * Roll constructor.
@@ -23,26 +24,41 @@ class Roll
         $this->roll = $roll;
     }
 
+    /**
+     * @return array
+     */
     public function retrieveRoll()
     {
         return $this->roll;
     }
 
+    /**
+     * @return bool
+     */
     public function isEmpty()
     {
         return empty($this->roll);
     }
 
+    /**
+     * @return array
+     */
     public function retrieveHighestPair()
     {
         return $this->findHighestRepeatedNumber(static::PAIR);
     }
 
+    /**
+     * @return array
+     */
     public function retrieveHighestThreeOfaKind()
     {
         return $this->findHighestRepeatedNumber(static::THREE_OF_A_KIND);
     }
 
+    /**
+     * @return array
+     */
     public function retrieveFourOfaKind()
     {
         return $this->findHighestRepeatedNumber(static::FOUR_OF_A_KIND);
@@ -80,6 +96,9 @@ class Roll
         });
     }
 
+    /**
+     * @return array
+     */
     public function retrieveDicesOfNumber($number)
     {
         return array_filter($this->roll, function ($dice) use ($number) {
@@ -87,11 +106,22 @@ class Roll
         });
     }
 
+    /**
+     * @return bool
+     */
     public function isSmallStraight()
     {
         $dices = $this->retrieveFirstFiveDifferentDices();
 
         return $dices === static::SMALL_STRAIGHT;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLargeStraight()
+    {
+        return $this->retrieveFirstFiveDifferentDices() === static::LARGE_STRAIGHT;
     }
 
     /**

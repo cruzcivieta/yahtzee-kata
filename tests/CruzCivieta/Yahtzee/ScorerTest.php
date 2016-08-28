@@ -373,7 +373,7 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function given_an_other_valid_small_straight_roll_then_return_fifteen()
+    public function given_another_valid_small_straight_roll_then_return_fifteen()
     {
         $scorer = new Scorer();
         $roll = new Roll([1, 2, 3, 4, 3, 5]);
@@ -392,6 +392,49 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
         $scorer = new Scorer();
         $roll = new Roll([1, 2, 3, 5, 5, 5]);
         $category = Category::smallStraight();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertSame(0, $score);
+    }
+
+
+    /**
+     * @test
+     */
+    public function given_a_valid_large_straight_roll_then_return_twenty()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([2, 2, 4, 5, 3, 6]);
+        $category = Category::largeStraight();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(20, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function given_another_valid_large_straight_roll_then_return_twenty()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([2, 3, 4, 5, 6, 6]);
+        $category = Category::largeStraight();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(20, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function given_a_not_valid_large_Straight_roll_then_return_zero()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([6, 6, 3, 4, 5, 6]);
+        $category = Category::largeStraight();
 
         $score = $scorer->score($roll, $category);
 

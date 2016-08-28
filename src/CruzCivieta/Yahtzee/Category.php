@@ -94,6 +94,11 @@ class Category
         return new static(10);
     }
 
+    public static function largeStraight()
+    {
+        return new static(11);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;
