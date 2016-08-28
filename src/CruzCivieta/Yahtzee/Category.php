@@ -58,6 +58,11 @@ class Category
         return new static(4);
     }
 
+    public static function five()
+    {
+        return new static(5);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;
@@ -76,6 +81,16 @@ class Category
     public function isThree()
     {
         return $this->isCategory(static::THREE);
+    }
+
+    public function isFour()
+    {
+        return $this->isCategory(4);
+    }
+
+    public function isFive()
+    {
+        return $this->isCategory(5);
     }
 
     public function isYahtzee()

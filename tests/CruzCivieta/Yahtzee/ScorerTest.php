@@ -146,5 +146,61 @@ class ScorerTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @test
+     */
+    public function give_a_not_valid_four_category_roll_then_return_zero()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([1,1,6,6,5]);
+        $category = Category::four();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertSame(0, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function give_a_valid_four_category_roll_then_return_sum_of_two_numbers()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([4,4,6,6,5]);
+        $category = Category::four();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(8, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function give_a_not_valid_five_category_roll_then_return_zero()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([1,1,6,6,3]);
+        $category = Category::five();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertSame(0, $score);
+    }
+
+    /**
+     * @test
+     */
+    public function give_a_valid_five_category_roll_then_return_sum_of_two_numbers()
+    {
+        $scorer = new Scorer();
+        $roll = new Roll([5,5,6,6,5]);
+        $category = Category::five();
+
+        $score = $scorer->score($roll, $category);
+
+        static::assertEquals(15, $score);
+    }
+
 
 }

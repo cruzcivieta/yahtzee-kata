@@ -31,6 +31,16 @@ class Scorer
             return array_sum($dicesFiltered);
         }
 
+        if ($category->isFour()) {
+            $dicesFiltered = $this->filterByNumber($dices, 4);
+            return array_sum($dicesFiltered);
+        }
+
+        if ($category->isFive()) {
+            $dicesFiltered = $this->filterByNumber($dices, 5);
+            return array_sum($dicesFiltered);
+        }
+
         if ($category->isYahtzee() && $dices === [1, 2, 3, 4, 5, 6]) {
             return 50;
         }
