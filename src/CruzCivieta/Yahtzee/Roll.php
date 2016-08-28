@@ -79,7 +79,7 @@ class Roll
         });
     }
 
-    public function retrieveDiceOfNumber($number)
+    public function retrieveDicesOfNumber($number)
     {
         return array_filter($this->roll, function ($dice) use ($number) {
             return $dice === $number;

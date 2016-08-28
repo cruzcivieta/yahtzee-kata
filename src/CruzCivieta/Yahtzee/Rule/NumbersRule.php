@@ -21,6 +21,6 @@ abstract class NumbersRule implements ScoreRule
 
     public function apply(Roll $roll)
     {
-        return array_sum($roll->retrieveDiceOfNumber($this->number));
+        return array_sum($roll->retrieveDicesOfNumber($this->number));
     }
 }
