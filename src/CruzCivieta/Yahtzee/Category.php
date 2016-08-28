@@ -89,6 +89,11 @@ class Category
         return new static(9);
     }
 
+    public static function smallStraight()
+    {
+        return new static(10);
+    }
+
     public function isCategory($category)
     {
         return $this->category == $category;
