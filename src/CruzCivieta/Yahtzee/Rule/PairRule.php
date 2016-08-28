@@ -16,26 +16,7 @@ class PairRule implements ScoreRule
      */
     public function apply(Roll $roll)
     {
-        $roll = $roll->retrieveHighestPair();
-
-        $reverseRoll = array_reverse($roll);
-        $differentDices = array_unique($reverseRoll);
-
-        if (count($differentDices) === 6) {
-            return 0;
-        }
-
-        foreach ($differentDices as $dice) {
-            $equalsDices = array_filter($reverseRoll, function($element) use ($dice) {
-                return $element === $dice;
-            });
-
-            if  (count($equalsDices) === 2) {
-                return array_sum($equalsDices);
-            }
-        }
-
-        return 0;
+        return array_sum($roll->retrieveHighestPair());
     }
 
     /**

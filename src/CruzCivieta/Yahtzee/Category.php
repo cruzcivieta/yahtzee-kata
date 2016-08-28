@@ -14,6 +14,7 @@ class Category
     const FOUR = 4;
     const FIVE = 5;
     const SIX = 6;
+    const PAIRS = 7;
 
     private $category;
 
@@ -75,7 +76,7 @@ class Category
 
     public static function pairs()
     {
-        return new static(7);
+        return new static(static::PAIRS);
     }
 
     public function isCategory($category)
@@ -125,7 +126,7 @@ class Category
 
     public function isPairCategory()
     {
-        return$this->isCategory(7);
+        return$this->isCategory(static::PAIRS);
     }
 
 }
