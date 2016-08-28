@@ -89,7 +89,7 @@ class Roll
 
     public function isSmallStraight()
     {
-        $dices = $this->retrieveFirstFiveDices();
+        $dices = $this->retrieveFirstFiveDifferentDices();
 
         return $dices === static::SMALL_STRAIGHT;
     }
@@ -97,8 +97,10 @@ class Roll
     /**
      * @return array
      */
-    private function retrieveFirstFiveDices()
+    private function retrieveFirstFiveDifferentDices()
     {
-        return array_slice($this->roll, 0, 5);
+        $differentDices = array_unique($this->roll);
+
+        return array_slice($differentDices, 0, 5);
     }
 }
